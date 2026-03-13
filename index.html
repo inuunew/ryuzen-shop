@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Game Top Up</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Outfit',sans-serif;
+}
+
+body{
+background: linear-gradient(180deg, #ecfdf5 0%, #f0fdf4 50%, #ffffff 100%);
+overflow-x:hidden;
+min-height:100vh;
+}
+
+/* HEADER */
+
+.header{
+background:#ff6a00;
+color:white;
+padding:16px;
+display:flex;
+align-items:center;
+gap:10px;
+font-size:18px;
+font-weight:500;
+}
+
+.back{
+font-size:22px;
+cursor:pointer;
+}
+
+/* BANNER */
+
+.banner-container{
+padding:15px;
+}
+
+.slider{
+position:relative;
+overflow:hidden;
+border-radius:14px;
+}
+
+.slide{
+display:none;
+}
+
+.slide img{
+width:100%;
+border-radius:14px;
+}
+
+.active{
+display:block;
+}
+
+/* DOT */
+
+.dots{
+text-align:center;
+margin-top:8px;
+}
+
+.dot{
+height:6px;
+width:18px;
+margin:4px;
+background:#ccc;
+display:inline-block;
+border-radius:10px;
+}
+
+.dot.active{
+background:#ff6a00;
+}
+
+/* SEARCH */
+
+.search-area{
+display:flex;
+gap:10px;
+padding:15px;
+align-items:center;
+}
+
+.search-box{
+flex:1;
+}
+
+.search-box input{
+width:100%;
+padding:12px;
+border-radius:10px;
+border:none;
+background:#fff;
+font-size:14px;
+}
+
+/* ICON BUTTON */
+
+.view-btn{
+display:flex;
+gap:10px;
+font-size:22px;
+color:#333;
+}
+
+/* TITLE */
+
+.section-title{
+padding:0 15px;
+font-weight:600;
+margin-bottom:10px;
+}
+
+/* GAME GRID */
+
+
+.game-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:14px;
+padding:15px;
+}
+
+/* CARD */
+
+.game-card{
+background:white;
+border-radius:18px;
+padding:12px;
+cursor:pointer;
+border:1px solid #ecfdf5;
+box-shadow:0 6px 14px rgba(0,0,0,0.05);
+transition:all 0.2s ease;
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align:center;
+}
+
+.game-card a{
+text-decoration:none;
+color:inherit;
+display:block;
+}
+
+.game-card:hover{
+transform:translateY(-4px);
+box-shadow:0 12px 22px rgba(22,163,74,0.15);
+border-color:#bbf7d0;
+}
+
+.topup-modal{
+z-index:9999;
+}
+/* IMAGE BOX */
+
+.game-img{
+width:100%;
+aspect-ratio:1/1;
+background:#f9fafb;
+border-radius:12px;
+padding:6px;
+display:flex;
+align-items:center;
+justify-content:center;
+margin-bottom:8px;
+border:1px solid #f1f5f9;
+}
+
+.game-img img{
+width:100%;
+height:100%;
+object-fit:contain;
+border-radius:10px;
+}
+
+/* GAME NAME */
+
+.game-name{
+font-size:13px;
+font-weight:600;
+color:#1f2937;
+margin-bottom:2px;
+}
+
+/* SERVICE */
+
+.game-service{
+font-size:11px;
+color:#16a34a;
+font-weight:500;
+}
+
+/* FOOTER */
+
+.footer{
+text-align:center;
+color:#666;
+font-size:14px;
+margin:30px 0;
+}
+
+.footer span{
+color:#ff6a00;
+font-weight:600;
+}
+
+/* NAVBAR STORE */
+
+.navbar{
+background:white;
+padding:12px 16px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+position:sticky;
+top:0;
+z-index:100;
+}
+
+.nav-left{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.logo{
+width:40px;
+height:40px;
+border-radius:10px;
+object-fit:cover;
+}
+
+.logo-text{
+display:flex;
+flex-direction:column;
+line-height:1.1;
+}
+
+.store{
+font-weight:700;
+font-size:18px;
+}
+
+.store span{
+color:#16a34a;
+}
+
+.sub{
+font-size:11px;
+color:#777;
+}
+
+.nav-right{
+display:flex;
+gap:12px;
+}
+
+.icon{
+font-size:20px;
+cursor:pointer;
+padding:6px;
+border-radius:8px;
+}
+
+.icon:hover{
+background:#f3f3f3;
+}
+/* INFORMATION BOX */
+
+.info-box{
+margin:10px 15px;
+background:white;
+border-radius:12px;
+padding:10px 12px;
+display:flex;
+align-items:center;
+gap:10px;
+border:1px solid #d1fae5;
+box-shadow:0 2px 6px rgba(0,0,0,0.05);
+}
+
+.info-icon{
+color:#16a34a;
+font-size:18px;
+}
+
+.info-text{
+font-size:13px;
+color:#15803d;
+font-weight:500;
+}
+
+/* TITLE STORE STYLE */
+
+.game-title{
+display:flex;
+align-items:center;
+gap:12px;
+padding:0 15px;
+margin-top:10px;
+margin-bottom:10px;
+}
+
+.title-bar{
+width:6px;
+height:32px;
+background:#16a34a;
+border-radius:6px;
+}
+
+.title-text h2{
+font-size:22px;
+font-weight:700;
+color:#1f2937;
+}
+
+.title-text p{
+font-size:13px;
+color:#6b7280;
+margin-top:2px;
+}
+.topup-modal{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+top:0;
+background:rgba(0,0,0,0.4);
+display:none;
+align-items:flex-end;
+}
+
+.topup-content{
+background:white;
+width:100%;
+border-radius:25px 25px 0 0;
+padding:20px;
+max-height:90vh;
+overflow:auto;
+}
+
+.topup-header{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.topup-header img{
+width:45px;
+border-radius:10px;
+}
+
+.instant{
+background:#e8f7ee;
+color:#1fa463;
+padding:4px 8px;
+border-radius:8px;
+font-size:12px;
+}
+
+.tabs{
+display:flex;
+margin-top:20px;
+border-bottom:2px solid #eee;
+}
+
+.tab{
+flex:1;
+padding:10px;
+background:none;
+border:none;
+font-weight:bold;
+color:#888;
+}
+
+.tab.active{
+color:#18a558;
+border-bottom:3px solid #18a558;
+}
+
+.topup-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+margin-top:20px;
+}
+
+.item{
+background:#f9fafb;
+border-radius:14px;
+padding:12px;
+border:1px solid #eee;
+}
+
+.price{
+color:#18a558;
+font-weight:bold;
+margin-top:5px;
+}
+
+.status{
+width:8px;
+height:8px;
+border-radius:50%;
+display:inline-block;
+margin-right:5px;
+}
+
+.online{
+background:#22c55e;
+}
+
+.offline{
+background:#ef4444;
+}
+.confirm-btn{
+width:100%;
+margin-top:20px;
+padding:14px;
+border:none;
+border-radius:12px;
+background:#16a34a;
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+opacity:0.5;
+transition:0.2s;
+}
+
+.confirm-btn.active{
+opacity:1;
+}
+.topup-content{
+animation:slideUp 0.25s ease;
+}
+
+@keyframes slideUp{
+from{
+transform:translateY(100%);
+}
+to{
+transform:translateY(0);
+}
+}
+.empty-item{
+grid-column:1 / -1;
+text-align:center;
+padding:30px;
+color:#6b7280;
+font-size:14px;
+background:#f9fafb;
+border-radius:12px;
+border:1px dashed #d1d5db;
+}
+
+.nav-right{
+display:flex;
+gap:15px;
+}
+
+.icon{
+font-size:20px;
+cursor:pointer;
+color:#333;
+transition:0.2s;
+}
+
+.icon:hover{
+color:#25D366;
+transform:scale(1.2);
+}
+
+</style>
+<style>
+
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:999;
+}
+
+.popup-box{
+background:white;
+padding:20px;
+border-radius:10px;
+width:300px;
+text-align:center;
+animation:fade 0.3s;
+}
+
+.popup-btn{
+margin-top:15px;
+display:flex;
+gap:10px;
+justify-content:center;
+}
+
+.popup-btn button{
+padding:8px 15px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.popup-btn .wa{
+background:#25D366;
+color:white;
+}
+
+@keyframes fade{
+from{transform:scale(0.8);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
+</style>
+
+</head>
+<body>
+<!-- POPUP OVERLAY -->
+<div id="overlay" class="popup">
+
+  <!-- POPUP NOTIF -->
+  <div id="notifBox" class="popup-box" style="display:none;">
+    <h3>🔔 Notifikasi</h3>
+    <p>🎉 Selamat datang di Ryuzen Shop!<br>
+    Nikmati layanan top up cepat dan aman.</p>
+
+    <div class="popup-btn">
+      <button onclick="closePopup()">Tutup</button>
+    </div>
+  </div>
+
+  <!-- POPUP ADMIN -->
+  <div id="adminBox" class="popup-box" style="display:none;">
+    <h3>ℹ️ Informasi Admin</h3>
+    <p>Admin Top Up<br>
+    Jam Online: 08:00 - 22:00</p>
+    <div class="popup-btn">
+      <button onclick="closePopup()">Tutup</button>
+    </div>
+  </div>
+
+</div>
+<div id="topupModal" class="topup-modal">
+
+  <div class="topup-content">
+
+    <div class="topup-header">
+      <img id="gameIcon">
+      <div>
+        <h2 id="gameName"></h2>
+        <span class="instant">Instant Process</span>
+      </div>
+
+      <button onclick="closeTopup()">✕</button>
+    </div>
+
+<div class="tabs">
+
+<button class="tab active" onclick="switchTab('regular',this)">
+Item Reguler
+</button>
+
+<button class="tab" onclick="switchTab('membership',this)">
+Membership
+</button>
+
+</div>
+
+<div id="topupItems" class="topup-grid"></div>
+
+<button id="confirmBtn" class="confirm-btn" onclick="goCheckout()" disabled>
+Konfirmasi
+</button>
+
+  </div>
+
+</div>
+
+<!-- HEADER -->
+
+<div class="navbar">
+
+<div class="nav-left">
+
+<img src="https://files.catbox.moe/0qwcuo.png" class="logo">
+
+<div class="logo-text">
+<div class="store">Ryuzen <span>Shop</span></div>
+<div class="sub">Top Up Games</div>
+</div>
+
+</div>
+
+<div class="nav-right">
+
+<!-- INFO ADMIN -->
+<div class="icon" onclick="showAdmin()">
+<i class="fas fa-circle-info"></i>
+</div>
+
+<!-- PUSAT BANTUAN -->
+<a href="bantuan.html" class="icon">
+<i class="fas fa-headset"></i>
+</a>
+
+<!-- NOTIFIKASI -->
+<div class="icon" onclick="showNotif()">
+<i class="fas fa-bell"></i>
+</div>
+
+</div>
+</div>
+<!-- BANNER -->
+
+<div class="banner-container">
+<!-- INFORMATION -->
+
+
+<div class="slider">
+
+<div class="slide active">
+<img src="https://files.catbox.moe/kv98v7.jpg">
+</div>
+
+<div class="slide">
+<img src="https://files.catbox.moe/kv98v7.jpg">
+</div>
+
+<div class="slide">
+<img src="https://files.catbox.moe/kv98v7.jpg">
+</div>
+
+</div>
+
+<div class="info-box">
+
+<div class="info-icon">
+📢
+</div>
+
+<marquee class="info-text" scrollamount="5">
+Selamat datang di Ryuzen Shop • Top Up Game Murah & Cepat • Promo Ramadhan Diskon Besar • Proses Otomatis 24 Jam
+</marquee>
+
+</div>
+
+</div>
+
+<!-- SEARCH -->
+
+<div class="search-area">
+
+<div class="search-box">
+<input type="text" id="searchGame" placeholder="Cari game...">
+</div>
+</div>
+
+<!-- TITLE -->
+
+<div class="game-title">
+
+<div class="title-bar"></div>
+
+<div class="title-text">
+<h2>Pilih Game</h2>
+<p>Katalog Ramadhan 1447H</p>
+</div>
+
+</div>
+
+<!-- GAME GRID -->
+
+<div class="game-grid" id="gameGrid"></div>
+<!-- PRODUK LAIN -->
+
+
+
+<!-- FOOTER -->
+
+<div class="footer">
+Powered by <span>RyuzenShop</span><br>
+© 2026 All rights reserved
+</div>
+
+<script src="database.js"></script>
+<script>
+
+let slides = document.querySelectorAll(".slide");
+let index = 0;
+
+/* SLIDER */
+
+function showSlide(){
+
+slides.forEach(slide=>{
+slide.classList.remove("active");
+});
+
+index++;
+
+if(index >= slides.length){
+index = 0;
+}
+
+slides[index].classList.add("active");
+
+}
+
+setInterval(showSlide,4000);
+
+
+/* SEARCH GAME */
+
+let search = document.getElementById("searchGame");
+
+search.addEventListener("keyup",function(){
+
+let keyword = search.value.toLowerCase();
+let games = document.querySelectorAll(".game-card");
+
+games.forEach(game=>{
+
+let name = game.innerText.toLowerCase();
+
+if(name.includes(keyword)){
+game.style.display="block";
+}else{
+game.style.display="none";
+}
+
+})
+
+})
+
+
+/* LOAD GAME LIST */
+
+const grid = document.getElementById("gameGrid");
+
+Object.keys(database).forEach(key => {
+
+const game = database[key];
+const total = game.regular.length;
+
+grid.innerHTML += `
+
+<div class="game-card" onclick="openTopup('${key}')">
+
+<div class="game-img">
+<img src="${game.image}">
+</div>
+
+<div class="game-name">
+${game.name}
+</div>
+
+<div class="game-service">
+${total} Layanan
+</div>
+
+</div>
+
+`;
+
+});
+
+
+/* LOAD PRODUK LAIN */
+
+const otherGrid = document.getElementById("otherGrid");
+
+if(typeof databaseOther !== "undefined"){
+
+Object.keys(databaseOther).forEach(key => {
+
+const item = databaseOther[key];
+
+otherGrid.innerHTML += `
+
+<div class="game-card" onclick="openOther('${key}')">
+
+<div class="game-img">
+<img src="${item.image}">
+</div>
+
+<div class="game-name">
+${item.name}
+</div>
+
+<div class="game-service">
+${item.items.length} Produk
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* GLOBAL VARIABLES */
+
+let currentGame = null
+let currentType = "regular"
+let selectedItem = null
+let isOtherProduct = false
+
+
+/* OPEN GAME TOPUP */
+
+function openTopup(game){
+
+const data = database[game]
+
+isOtherProduct = false
+currentGame = game
+currentType = "regular"
+selectedItem = null
+
+document.getElementById("gameName").innerText = data.name
+document.getElementById("gameIcon").src = data.image
+
+document.getElementById("confirmBtn").disabled = true
+document.getElementById("confirmBtn").classList.remove("active")
+
+renderItems()
+
+document.getElementById("topupModal").style.display="flex"
+
+document.getElementById("topupModal").onclick = function(e){
+if(e.target.id === "topupModal"){
+closeTopup()
+}
+}
+
+}
+
+
+/* OPEN PRODUK LAIN */
+
+function openOther(key){
+
+const data = databaseOther[key]
+
+isOtherProduct = true
+currentGame = key
+selectedItem = null
+
+document.getElementById("gameName").innerText = data.name
+document.getElementById("gameIcon").src = data.image
+
+const container = document.getElementById("topupItems")
+container.innerHTML=""
+
+data.items.forEach(item=>{
+
+const div = document.createElement("div")
+div.className="item"
+
+div.innerHTML = `
+<span class="status online"></span>
+${item.name}
+<div class="price">${item.price}</div>
+`
+
+div.onclick = function(){
+
+document.querySelectorAll(".item").forEach(i=>{
+i.style.border="1px solid #eee"
+})
+
+div.style.border="2px solid #16a34a"
+
+selectedItem = item
+
+const btn = document.getElementById("confirmBtn")
+btn.disabled = false
+btn.classList.add("active")
+
+}
+
+container.appendChild(div)
+
+})
+
+document.getElementById("topupModal").style.display="flex"
+
+}
+
+
+/* RENDER GAME ITEMS */
+
+function renderItems(){
+
+const container = document.getElementById("topupItems")
+container.innerHTML=""
+
+const data = database[currentGame]
+const items = data[currentType]
+
+if(!items || items.length === 0){
+
+container.innerHTML = `
+<div class="empty-item">
+Membership belum tersedia
+</div>
+`
+
+return
+}
+
+items.forEach(item=>{
+
+const div = document.createElement("div")
+div.className="item"
+
+div.innerHTML = `
+<span class="status online"></span>
+${item.name}
+<div class="price">${item.price}</div>
+`
+
+div.onclick = function(){
+
+document.querySelectorAll(".item").forEach(i=>{
+i.style.border="1px solid #eee"
+})
+
+div.style.border="2px solid #16a34a"
+
+selectedItem = item
+
+const btn = document.getElementById("confirmBtn")
+btn.disabled = false
+btn.classList.add("active")
+
+}
+
+container.appendChild(div)
+
+})
+
+}
+
+
+/* SWITCH TAB */
+
+function switchTab(type,btn){
+
+currentType = type
+
+document.querySelectorAll(".tab").forEach(t=>{
+t.classList.remove("active")
+})
+
+btn.classList.add("active")
+
+renderItems()
+
+}
+
+
+/* KONFIRMASI KE CHECKOUT */
+
+function goCheckout(){
+
+if(!selectedItem){
+return;
+}
+
+let gameName
+let image
+let type
+
+if(isOtherProduct){
+
+const data = databaseOther[currentGame]
+
+gameName = data.name
+image = data.image
+type = "other"
+
+}else{
+
+const gameData = database[currentGame]
+
+gameName = gameData.name
+image = gameData.image
+type = gameData.type
+
+}
+
+const itemName = selectedItem.name
+const price = selectedItem.price.replace(/[^\d]/g,'')
+
+window.location.href =
+`checkout.html?game=${encodeURIComponent(gameName)}&item=${encodeURIComponent(itemName)}&price=${price}&image=${encodeURIComponent(image)}&type=${type}`
+
+}
+
+
+/* CLOSE MODAL */
+
+function closeTopup(){
+document.getElementById("topupModal").style.display="none"
+}
+
+</script>
+<script>
+
+function showAdmin(){
+
+document.getElementById("overlay").style.display="flex"
+document.getElementById("adminBox").style.display="block"
+document.getElementById("notifBox").style.display="none"
+
+}
+
+function showNotif(){
+
+document.getElementById("overlay").style.display="flex"
+document.getElementById("notifBox").style.display="block"
+document.getElementById("adminBox").style.display="none"
+
+}
+
+function closePopup(){
+
+document.getElementById("overlay").style.display="none"
+document.getElementById("adminBox").style.display="none"
+document.getElementById("notifBox").style.display="none"
+
+}
+
+
+</script>
+</body>
+</html>

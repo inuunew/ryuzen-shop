@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout</title>
+
+<style>
+body{font-family:Arial,sans-serif;background:#f3f4f6;margin:0;padding:0;}
+.header{display:flex;align-items:center;padding:15px;background:white;box-shadow:0 2px 5px rgba(0,0,0,0.05);}
+.back{font-size:22px;margin-right:10px;cursor:pointer;}
+.title{font-weight:bold;font-size:18px;}
+.card{background:white;margin:15px;padding:15px;border-radius:14px;box-shadow:0 2px 6px rgba(0,0,0,0.06);}
+.product{display:flex;align-items:center;gap:15px;}
+.product img{width:60px;border-radius:10px;}
+.badge{background:#e6f7ed;color:#1ea55b;font-size:12px;padding:3px 8px;border-radius:6px;display:inline-block;margin-bottom:5px;}
+.price{color:#555;}
+.label{font-weight:bold;margin-bottom:6px;display:block;}
+.input-group{display:flex;align-items:center;border:1px solid #ddd;border-radius:10px;overflow:hidden;}
+.input-group input{flex:1;border:none;padding:12px;outline:none;}
+.input-group select{flex:1;border:none;padding:12px;outline:none;}
+.search{background:#e8eef7;border:none;padding:12px 15px;cursor:pointer;}
+.row{display:flex;justify-content:space-between;margin:8px 0;}
+.total{font-size:20px;color:#16a34a;font-weight:bold;}
+.footer{position:fixed;bottom:0;left:0;right:0;background:white;padding:15px;box-shadow:0 -2px 10px rgba(0,0,0,0.05);display:flex;justify-content:space-between;align-items:center;}
+.pay{background:#16a34a;color:white;border:none;padding:12px 30px;border-radius:10px;font-size:16px;cursor:pointer;}
+.bill{color:#16a34a;font-weight:bold;font-size:18px;}
+.loading{font-size:13px;color:#555;margin-top:8px;}
+.payment-select{display:flex;justify-content:space-between;align-items:center;border:1px solid #ddd;padding:12px;border-radius:10px;cursor:pointer;background:#fafafa;}
+.payment-arrow{font-size:12px;}
+.payment-list{display:none;margin-top:10px;}
+.payment-item{padding:10px;border:1px solid #eee;border-radius:10px;margin-bottom:8px;cursor:pointer;}
+.payment-item:hover{background:#f5f5f5;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+<div class="back" onclick="goHome()">←</div>
+<div class="title">Detail Pesanan</div>
+</div>
+
+<!-- PRODUK -->
+<div class="card">
+<div class="product">
+<img id="gameImage">
+<div>
+<div class="badge">GAMES</div>
+<div id="itemName"></div>
+<div class="price" id="price"></div>
+</div>
+</div>
+</div>
+
+<!-- USER ID -->
+<div class="card" id="userIdBox">
+<label class="label">USER ID</label>
+<div class="input-group">
+<input type="text" placeholder="Masukkan ID Player" id="userId">
+<button class="search">🔍</button>
+</div>
+<div id="nicknameBox" style="margin-top:8px;font-size:13px;color:#16a34a;display:none;">
+Nickname : <span id="nickname"></span>
+</div>
+</div>
+
+<!-- SERVER -->
+<div class="card" id="serverBox" style="display:none;">
+<label class="label">SERVER</label>
+<div class="input-group" id="mlServer" style="display:none;">
+<input type="number" placeholder="Server ID (Contoh: 1234)" id="serverId">
+</div>
+<div class="input-group" id="genshinServer" style="display:none;">
+<select id="serverRegion">
+<option value="">Pilih Server</option>
+<option value="Asia">Asia</option>
+<option value="America">America</option>
+<option value="Europe">Europe</option>
+<option value="TW / HK / MO">TW / HK / MO</option>
+</select>
+</div>
+</div>
+
+<!-- PAYMENT -->
+<div class="card">
+<h4>METODE PEMBAYARAN</h4>
+<div class="payment-select" onclick="togglePayment()">
+<div id="paymentSelected">Pilih Metode Pembayaran</div>
+<div class="payment-arrow">▼</div>
+</div>
+<div class="payment-list" id="paymentList">
+<div class="payment-item" onclick="selectPayment('QRIS')">QRIS</div>
+<div class="payment-item" onclick="selectPayment('DANA')">DANA</div>
+<div class="payment-item" onclick="selectPayment('OVO')">OVO</div>
+<div class="payment-item" onclick="selectPayment('GoPay')">GoPay</div>
+<div class="payment-item" onclick="selectPayment('Shoopepay')">Shoopepay</div>
+<div class="payment-item" onclick="selectPayment('Transfer Bank')">Transfer Bank</div>
+</div>
+</div>
+
+<!-- RINCIAN -->
+<div class="card">
+<h4>RINCIAN TRANSAKSI</h4>
+<div class="row"><span>Subtotal Produk</span><span id="subtotal"></span></div>
+<hr>
+<div class="row"><span>Total Pembayaran</span><span class="total" id="total"></span></div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+<div>
+<div style="font-size:12px;color:#777;">TOTAL TAGIHAN</div>
+<div class="bill" id="bill"></div>
+</div>
+<button class="pay" onclick="bayar()">Bayar</button>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search)
+const game = params.get("game")
+const item = params.get("item")
+const price = params.get("price")
+const type = params.get("type")
+
+// Tampilkan data
+document.getElementById("itemName").innerText = game + " " + item
+document.getElementById("price").innerText = "Rp " + Number(price).toLocaleString("id-ID")
+document.getElementById("subtotal").innerText = "Rp " + Number(price).toLocaleString("id-ID")
+document.getElementById("total").innerText = "Rp " + Number(price).toLocaleString("id-ID")
+document.getElementById("bill").innerText = "Rp " + Number(price).toLocaleString("id-ID")
+document.getElementById("gameImage").src = params.get("image")
+
+// Cek type game
+if(type === "idserver"){
+    document.getElementById("serverBox").style.display = "block";
+    const gameNameLower = game.toLowerCase();
+    if(gameNameLower.includes("mobile legends")){
+        document.getElementById("mlServer").style.display = "flex";
+        document.getElementById("genshinServer").style.display = "none";
+    } else if(gameNameLower.includes("genshin")){
+        document.getElementById("genshinServer").style.display = "flex";
+        document.getElementById("mlServer").style.display = "none";
+    }
+}
+
+// Simulasi cek nickname
+document.querySelector(".search").onclick = function(){
+    const id = document.getElementById("userId").value
+    const nickBox = document.getElementById("nicknameBox")
+    if(!id){alert("Masukkan ID dulu"); return}
+    nickBox.style.display = "block"
+    nickBox.innerHTML = '<span class="loading">Mengecek nickname...</span>'
+    setTimeout(()=>{
+        nickBox.innerHTML = 'Status : <b>ID Terdaftar silahkan cek kembali</b>'
+    },1200)
+}
+
+// Back
+function goHome(){window.location.href="index.html"}
+
+// BAYAR
+const adminWa = "6283160556330"
+let selectedPayment = ""
+
+function bayar(){
+    const id = document.getElementById("userId").value || "-"
+    let server = "-"
+    const ml = document.getElementById("serverId")
+    const genshin = document.getElementById("serverRegion")
+    if(ml && ml.value) server = ml.value
+    if(genshin && genshin.value) server = genshin.value
+    if(!selectedPayment){alert("Pilih metode pembayaran dulu"); return}
+    if(type === "idserver" && !server){alert("Masukkan Server dulu"); return}
+    if(type !== "voucher" && !id){alert("Masukkan ID / UID dulu"); return}
+    
+    let pesan = `*ORDER TOP UP*\n\nGame : ${game}\nProduk : ${item}\nHarga : Rp ${Number(price).toLocaleString("id-ID")}\nPembayaran : ${selectedPayment}\n`
+    if(type === "id" || type==="idserver") pesan += `ID : ${id}\n`
+    if(type === "idserver") pesan += `Server : ${server}\n`
+    pesan += "\nMohon diproses admin"
+    
+    window.open(`https://wa.me/${adminWa}?text=${encodeURIComponent(pesan)}`)
+}
+
+// Payment select
+function togglePayment(){
+    const list = document.getElementById("paymentList")
+    list.style.display = list.style.display === "block" ? "none" : "block"
+}
+function selectPayment(name){
+    selectedPayment = name
+    document.getElementById("paymentSelected").innerText = name
+    document.getElementById("paymentList").style.display = "none"
+}
+</script>
+</body>
+</html>
