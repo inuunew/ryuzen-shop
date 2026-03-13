@@ -26,7 +26,7 @@ const database = {
     membership: [
       { name: "Membership harian", price: "Rp15.000" },
       { name: "Membership Mingguan 50 DM", price: "Rp30.000" }, 
-      { name: "membership bulanan", price: "Rp84.000" }
+      { name: "membership bulanan", price: "Rp84.000" }, 
       { name: "Boyah Pass", price: "Rp44.000" }
     ]
   },
