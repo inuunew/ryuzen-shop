@@ -4,6 +4,7 @@ const database = {
     name: "Free Fire",
     type: "id",
     image: "assets/ff.png",
+    premium: true,
     regular: [
       { name: "5 Diamond Free Fire", price: "Rp1.500" },
       { name: "12 Diamond Free Fire", price: "Rp2.500" },
@@ -25,8 +26,8 @@ const database = {
     ],
     membership: [
       { name: "Membership harian", price: "Rp15.000" },
-      { name: "Membership mingguan", price: "Rp30.000" }, 
-      { name: "membership bulanan", price: "Rp84.000" }, 
+      { name: "Membership Mingguan 50 DM", price: "Rp30.000" }, 
+      { name: "membership bulanan", price: "Rp84.000" }
       { name: "Boyah Pass", price: "Rp44.000" }
     ]
   },
@@ -35,6 +36,7 @@ const database = {
     name: "Mobile Legends",
     type: "idserver",
     image: "assets/ml.png",
+    premium: true,
     regular: [
       { name: "3 Diamond ML", price: "Rp1.500" },
       { name: "5 Diamond ML", price: "Rp2.000" },
@@ -104,6 +106,7 @@ const database = {
     name: "PUBG Mobile",
     type: "uid",
     image: "assets/pubg.png",
+    premium: false,
     regular: [
       { name: "15 UC", price: "Rp8.000" },
       { name: "25 UC", price: "Rp15.500" },
@@ -133,6 +136,7 @@ const database = {
     name: "Genshin Impact",
     type: "idserver", // ubah ke uid supaya konsisten 
     image: "assets/genshin.png",
+    premium: false, 
     regular: [
       { name: "60 Genesis Crystals", price: "Rp15.000" },
       { name: "330 Genesis Crystals", price: "Rp60.000" },
@@ -149,6 +153,7 @@ const database = {
     name: "Honor of Kings",
     type: "id",
     image: "assets/hok.png",
+    premium: false, 
     regular: [
       { name: "8 Tokens HOK", price: "Rp2.500" },
       { name: "17 Tokens HOK", price: "Rp3.500" },
@@ -171,6 +176,7 @@ const database = {
     name: "Call of Duty",
     type: "uid",
     image: "assets/cod.png",
+    premium: false, 
     regular: [
       { name: "31 CP", price: "Rp6.000" },
       { name: "62 CP", price: "Rp13.000" },
