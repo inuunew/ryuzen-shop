@@ -538,6 +538,25 @@ from{transform:scale(0.8);opacity:0;}
 to{transform:scale(1);opacity:1;}
 }
 
+/* badge */
+.badge{
+position:absolute;
+top:6px;
+left:6px;
+font-size:10px;
+padding:3px 6px;
+border-radius:6px;
+color:white;
+font-weight:600;
+}
+
+/* PREMIUM */
+.badge-premium{
+background:linear-gradient(135deg,#facc15,#f59e0b);
+color:#000;
+right:6px;
+left:auto;
+}
 </style>
 
 </head>
@@ -666,10 +685,8 @@ Konfirmasi
 </div>
 
 <marquee class="info-text" scrollamount="5">
-Selamat datang di Ryuzen Shop • Top Up Game Murah & Cepat • Promo Ramadhan Diskon Besar • Proses Otomatis 24 Jam
+Selamat datang di Ryuzen Shop • Top Up Game Murah & Cepat • Promo Spesial Diskon Besar • Proses Otomatis 24 Jam
 </marquee>
-
-</div>
 
 </div>
 
@@ -690,7 +707,8 @@ Selamat datang di Ryuzen Shop • Top Up Game Murah & Cepat • Promo Ramadhan D
 
 <div class="title-text">
 <h2>Pilih Game</h2>
-<p>Katalog Ramadhan 1447H</p>
+<p>Top Up Sekarang Juga!</p>
+<p> Diamond Langsung Masuk Tanpa Ribet!</p>
 </div>
 
 </div>
@@ -768,22 +786,26 @@ Object.keys(database).forEach(key => {
 
 const game = database[key];
 const total = game.regular.length;
+const premium = game.premium;
 
 grid.innerHTML += `
 
 <div class="game-card" onclick="openTopup('${key}')">
 
-<div class="game-img">
-<img src="${game.image}">
+<div style="position:relative;width:100%;">
+
+  ${hot ? `<div class="badge badge-hot">🔥</div>` : ``}
+  ${fav ? `<div class="badge badge-fav">⭐</div>` : ``}
+  ${premium ? `<div class="badge badge-premium">👑</div>` : ``}
+
+  <div class="game-img">
+    <img src="${game.image}">
+  </div>
+
 </div>
 
-<div class="game-name">
-${game.name}
-</div>
-
-<div class="game-service">
-${total} Layanan
-</div>
+<div class="game-name">${game.name}</div>
+<div class="game-service">${total} Layanan</div>
 
 </div>
 
