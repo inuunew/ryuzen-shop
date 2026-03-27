@@ -1,3 +1,4 @@
+const database = {
 ff: {
     name: "Free Fire",
     type: "id",
