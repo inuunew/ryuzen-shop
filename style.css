@@ -116,22 +116,26 @@
   box-shadow: 0 4px 15px rgba(234, 179, 8, 0.5);
 }
 .btn-login {
-  background: linear-gradient(95deg, #f97316, #ea580c);
-  border: none;
-  padding: 14px 32px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: white;
-  border-radius: 40px;
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+  background: linear-gradient(135deg, #fbbf24, #eab308);
+  color: #0f0f0f;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(251, 191, 36, 0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: none;
   cursor: pointer;
-  box-shadow: 0 10px 20px -5px rgba(249,115,22,0.4);
-  transition: all 0.2s;
 }
 .btn-login:hover { transform: scale(1.02); background: linear-gradient(95deg, #ea580c, #c2410c); }
-.btn-login:active { transform: scale(0.98); }
+.btn-login:active { 
+transform: scale(0.96);
+box-shadow: 0 4px 15px rgba(234, 179, 8, 0.5);
+ }
 
 /* ========== KONTEN UTAMA ========== */
 .main-content {
@@ -1219,4 +1223,4 @@ body {
     .kalkulator-page .result-value {
         font-size: 1.3rem;
     }
-    }
+  }
