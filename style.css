@@ -240,7 +240,7 @@ body {
   gap: 4px;
 }
 .bottom-nav div i { font-size: 20px; }
-.bottom-nav .active { color: #16a34a; }
+.bottom-nav .active { color: #FFE500; }
 
 /* ========== POPUP ========== */
 .popup {
