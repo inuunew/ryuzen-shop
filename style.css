@@ -106,7 +106,7 @@ body {
   font-size: 14px;
   margin: 30px 0;
 }
-.footer span { color: #ff6a00; font-weight: 600; }
+.footer span { color: #FFD700; font-weight: 600; }
 
 /* ========== NAVBAR ========== */
 .navbar {
@@ -141,7 +141,7 @@ body {
   font-weight: 700;
   font-size: 18px;
 }
-.store span { color: #16a34a; }
+.store span { color: #FFD700; }
 .sub {
   font-size: 11px;
   color: #777;
@@ -1166,4 +1166,4 @@ body {
     .kalkulator-page .result-value {
         font-size: 1.3rem;
     }
-}
+  }
