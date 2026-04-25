@@ -141,7 +141,7 @@ body {
   font-weight: 700;
   font-size: 18px;
 }
-.store span { color: #FFE500; }
+.store span { color: #996515; }
 .sub {
   font-size: 11px;
   color: #777;
@@ -436,7 +436,7 @@ body {
 .beranda-page .slider-controls button {
     background: #1a1a1a;    /* Warna gelap khas Inuu Market */
     color: #FFE500;         /* Warna hijau neon */
-    border: 1px solid #00ff88;
+    border: 1px solid #FFE500;
     padding: 8px 20px;
     border-radius: 5px;
     cursor: pointer;
@@ -462,7 +462,7 @@ body {
   border: 1px solid #d1fae5;
   overflow: hidden;
 }
-.beranda-page .info-icon { color: #FFE500; font-size: 18px; flex-shrink: 0; }
+.beranda-page .info-icon { color: #996515; font-size: 18px; flex-shrink: 0; }
 .beranda-page .info-text {
   flex: 1;
   overflow: hidden;
@@ -500,7 +500,7 @@ body {
 .beranda-page .title-bar {
   width: 60px;             /* Panjang garis horizontal */
   height: 4px;             /* Ketebalan garis */
-  background: #FFE500;     /* Tetap hijau */
+  background: #996515;     /* Tetap hijau */
   border-radius: 6px;
   margin-top: 6px;         /* Jarak dari teks ke garis */
 }
@@ -579,7 +579,7 @@ body {
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   cursor: pointer;
 }
-.beranda-page .menu-card i { font-size: 24px; color: #FFE500; margin-bottom: 8px; }
+.beranda-page .menu-card i { font-size: 24px; color: #996515; margin-bottom: 8px; }
 .beranda-page .menu-card p { font-size: 13px; font-weight: 600; }
 .beranda-page #gameGrid, .beranda-page #panelGrid, .beranda-page #otherGrid { display: none; }
 .beranda-page #titleGame, .beranda-page #titleHosting, .beranda-page #titleOther { display: none; }
