@@ -9,7 +9,7 @@
 
 /* ========== SPLASH SCREEN ========== */
 /* ========== SPLASH SCREEN ========== */
-/* ========== SPLASH SCREEN (EMAS, UKURAN PROPORSIONAL) ========== */
+/* ========== SPLASH SCREEN (WELCOME LEBIH BESAR) ========== */
 .splash {
   position: fixed;
   top: 0;
@@ -61,19 +61,22 @@
   opacity: 0.9;
 }
 
-/* Welcome! */
+/* 🔥 Welcome! – PALING BESAR */
 .splash-container .welcome-text {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #fde047;
-  margin-bottom: 10px;
-  letter-spacing: 0.5px;
+  font-size: 2.8rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fbbf24 0%, #eab308 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
 }
 
 /* Judul utama (lebih kecil) */
 .splash-container h1 {
-  font-size: 2rem;
-  font-weight: 800;
+  font-size: 1.6rem;
+  font-weight: 600;
   background: linear-gradient(135deg, #fbbf24 0%, #eab308 80%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -1216,4 +1219,4 @@ body {
     .kalkulator-page .result-value {
         font-size: 1.3rem;
     }
-  }
+    }
