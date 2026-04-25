@@ -193,6 +193,24 @@ const database = {
     { name: "5000 Gold", price: "Rp600.000", status: "online" }
   ],
   membership: []
+}, 
+codm: {
+  name: "Call of Duty Mobile",
+  require: ["userId"],
+  image: "https://litter.catbox.moe/6vvyam.jpg",
+  qris: false,
+  desc: "Top up CP Call of Duty Mobile legal & aman",
+  detail: "Proses cepat, 24 jam nonstop",
+  regular: [
+    { name: "31 CP", price: "Rp6.000", status: "online" },
+    { name: "62 CP", price: "Rp10.000", status: "online" },
+    { name: "127 CP", price: "Rp20.000", status: "online" },
+    { name: "317 CP", price: "Rp46.000", status: "online" },
+    { name: "634 CP", price: "Rp95.000", status: "online" },
+    { name: "1373 CP", price: "Rp155.000", status: "online" },
+    { name: "2059 CP", price: "Rp216.000", status: "online" }
+  ],
+  membership: []
 }
 };
 
@@ -328,8 +346,7 @@ const databaseHiburan = {
     desc: "boleh pakai email dari seller/buyer",
     detail: "bergaransi 1 bulan setelah pembelian",
     items: [
-      { name: "Gemini Pro 1 bulan", price: "Rp5.000", status: "online" },
-      { name: "Method gemini pro", price: "Rp10.000", status: "online" }
+      { name: "Gemini Pro 1 bulan", price: "Rp5.000", status: "online" }
     ],
     membership: []
   },
