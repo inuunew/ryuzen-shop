@@ -747,7 +747,7 @@ body{
   <div class="row"><span><i class="fas fa-tag"></i> Harga Produk (per unit)</span><span id="hargaSatuan"></span></div>
   <div class="row" id="rowNominal" style="display:none;"><span><i class="fas fa-coins"></i> Nominal Topup</span><span id="nominalValue"></span></div>
   <div class="row" id="rowSubtotal" style="display:none;"><span><i class="fas fa-calculator"></i> Subtotal (harga x jumlah)</span><span id="subtotalProduk"></span></div>
-  <div class="row" id="rowAdminFee"><span><i class="fas fa-calculator"></i> Biaya Admin (Rp200) <span class="admin-badge">flat</span></span><span id="biayaAdmin"></span></div>
+  <!-- BARIS BIAYA ADMIN DIHAPUS -->
   <hr style="margin:8px 0;">
   <div class="row"><span><i class="fas fa-coins"></i> TOTAL YANG HARUS DIBAYAR</span><span class="total" id="totalAmount"></span></div>
 </div>
@@ -779,8 +779,8 @@ const isQtyActive = produk.qty === true || produk.qty === "active";
 let currentQty = 1;
 const basePricePerUnit = Number(params.get("price")) || 0;
 
-// Biaya admin: jika produk punya require nominal, admin fee = 0, jika tidak = 200
-const adminFee = hasNominal ? 0 : 200;
+// Biaya admin dihapus, set 0
+const adminFee = 0;
 
 // Elemen DOM
 const userIdBox = document.getElementById("userIdBox");
@@ -804,8 +804,6 @@ const nominalBox = document.getElementById("nominalBox");
 const nominalInput = document.getElementById("nominalInput");
 const rowNominal = document.getElementById("rowNominal");
 const nominalValueSpan = document.getElementById("nominalValue");
-const rowAdminFee = document.getElementById("rowAdminFee");
-const biayaAdminSpan = document.getElementById("biayaAdmin");
 
 const game = params.get("game") || produk.name || "Game";
 const item = params.get("item") || "Item";
@@ -838,7 +836,8 @@ function updateTotal() {
     nominalDisplay = nominalInput.value.trim();
   }
   
-  const totalPrice = subtotalProduk + nominalValue + adminFee;
+  // Total tanpa admin fee
+  const totalPrice = subtotalProduk + nominalValue;
   
   // Update tampilan
   document.getElementById("hargaSatuan").innerHTML = formatRupiah(basePricePerUnit);
@@ -857,13 +856,7 @@ function updateTotal() {
     rowSubtotal.style.display = "none";
   }
   
-  // Tampilkan atau sembunyikan baris biaya admin (jika adminFee 0, sembunyikan)
-  if (adminFee === 0) {
-    rowAdminFee.style.display = "none";
-  } else {
-    rowAdminFee.style.display = "flex";
-    biayaAdminSpan.innerHTML = formatRupiah(adminFee);
-  }
+  // Baris biaya admin tidak ditampilkan karena 0 dan tidak ada elemennya lagi
   
   document.getElementById("totalAmount").innerHTML = formatRupiah(totalPrice);
   document.getElementById("billFooter").innerHTML = formatRupiah(totalPrice);
@@ -920,11 +913,7 @@ if (selectedItemDetail) {
   if (isQtyActive) detailHtml += `<strong><i class="fas fa-cubes"></i> Jumlah beli:</strong> bisa tambah jumlah<br>`;
   if (hasNominal) detailHtml += `<strong><i class="fas fa-coins"></i> Nominal tambahan:</strong> akan ditambahkan ke total<br>`;
   detailHtml += `<strong><i class="fas fa-bolt"></i> Status:</strong> ${statusText}<br>`;
-  if (adminFee === 0) {
-    detailHtml += `<span style="font-size:12px; color:#16a34a;"><i class="fas fa-gift"></i> MOHON PERIKSA LAGI NOMOR TUJUAN!</span>`;
-  } else {
-    detailHtml += `<span style="font-size:12px; color:#4b5563;"><i class="fas fa-info-circle"></i> Biaya admin flat Rp200 sudah termasuk total.</span>`;
-  }
+  // Tidak ada teks biaya admin
   detailCardContent.innerHTML = detailHtml;
 } else {
   detailCard.style.display = "none";
@@ -1043,7 +1032,7 @@ function openInfo() {
       <p><strong><i class="fas fa-shopping-cart"></i> Cara transaksi :</strong></p>
       <ol><li>Masukkan Data yang valid</li><li>Pilih nominal / item</li><li>Atur jumlah beli (jika tersedia)</li><li>Masukkan nominal topup (jika ada)</li><li>Pilih metode pembayaran</li><li>Klik Bayar & lakukan pembayaran</li><li>Proses otomatis/max 15 menit</li></ol>
       <p>${descText}</p>
-      ${adminFee === 0 ? '<p style="background:#e6f7ed; padding:8px; border-radius:16px; margin-top:12px;"><strong><i class="fas fa-percent"></i>ISI DENGAN BENAR</strong> untuk produk ini!</p>' : '<p style="background:#eef2ff; padding:8px; border-radius:16px; margin-top:12px;"><strong><i class="fas fa-percent"></i> Biaya Admin Flat Rp200</strong> sudah termasuk dalam total yang dibayarkan.</p>'}
+      <!-- Tidak ada info biaya admin -->
     </div>
     <div class="note"><strong><i class="fas fa-lightbulb"></i> Catatan:</strong> Nominal yang dimasukkan akan ditambahkan ke total harga. Hubungi CS jika ada kendala. <a href="https://wa.me/6287714886908" target="_blank"><i class="fab fa-whatsapp"></i> Klik CS WhatsApp</a></div>
   `;
@@ -1065,7 +1054,7 @@ function goHome() { window.location.href = "index.html"; }
 function openSheet(){
   const subtotalProduk = basePricePerUnit * currentQty;
   const nominalValue = hasNominal ? extractNominalValue(nominalInput.value) : 0;
-  const totalPrice = subtotalProduk + nominalValue + adminFee;
+  const totalPrice = subtotalProduk + nominalValue; // tanpa admin
   
   document.getElementById("confirmSheet").classList.add("show");
   document.getElementById("sheetImage").src = image;
@@ -1074,7 +1063,6 @@ function openSheet(){
   if (hasNominal && nominalInput.value.trim()) {
     priceText += ` + nominal ${nominalInput.value.trim()}`;
   }
-  if (adminFee > 0) priceText += ` + admin Rp${adminFee}`;
   document.getElementById("sheetPrice").innerHTML = priceText;
   document.getElementById("sheetHarga").innerHTML = formatRupiah(totalPrice);
   let userData = document.getElementById("userId")?.value || document.getElementById("username")?.value || document.getElementById("phone")?.value || "Data akan dikirim via WA";
@@ -1098,7 +1086,7 @@ function lanjutWA(){
   
   const subtotalProduk = basePricePerUnit * currentQty;
   const nominalValue = hasNominal ? extractNominalValue(nominalInput.value) : 0;
-  const totalPrice = subtotalProduk + nominalValue + adminFee;
+  const totalPrice = subtotalProduk + nominalValue;
   
   let nominalInfoForWA = "";
   if (hasNominal) {
@@ -1107,14 +1095,11 @@ function lanjutWA(){
     nominalInfoForWA = "Tidak ada nominal khusus";
   }
   
-  let adminInfoWA = adminFee > 0 ? `Biaya Admin: ${formatRupiah(adminFee)}` : "";
-  
   const message = encodeURIComponent(
     `*ORDER RYUZEN STORE* 🛒\n\n`+
     `Produk: ${game}\nItem: ${item}\nJumlah: ${currentQty} x ${formatRupiah(basePricePerUnit)}\n`+
     `Subtotal: ${formatRupiah(subtotalProduk)}\n`+
     `${nominalInfoForWA}\n`+
-    `${adminInfoWA}\n`+
     `*TOTAL BAYAR: ${formatRupiah(totalPrice)}*\n\n`+
     `*Detail Pembayaran*\n`+
     `User ID: ${document.getElementById("userId")?.value || '-'}\n`+
@@ -1163,7 +1148,7 @@ function bayar(){
   
   const subtotalProduk = basePricePerUnit * currentQty;
   const nominalValue = hasNominal ? extractNominalValue(nominalInput.value) : 0;
-  const totalPrice = subtotalProduk + nominalValue + adminFee;
+  const totalPrice = subtotalProduk + nominalValue;
   
   const invoiceUrl = "invoice.html?" +
     "key="+encodeURIComponent(key)+
@@ -1207,4 +1192,4 @@ if(game.toLowerCase().includes("mobile legend") || game.toLowerCase().includes("
 }
 </script>
 </body>
-</html>
+  </html>
