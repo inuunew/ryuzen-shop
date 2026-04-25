@@ -180,7 +180,7 @@ const database = {
   BloodStrike: {
   name: "Blood Strike",
   require: ["userId"],
-  image: "https://files.catbox.moe/8uf9aq.jpg",
+  image: "https://files.catbox.moe/7n9l3i.jpeg",
   qris: false,
   desc: "Top up Gold Blood Strike legal & aman",
   detail: "Proses cepat, 24 jam nonstop",
