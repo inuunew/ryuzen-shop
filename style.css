@@ -141,7 +141,7 @@ body {
   font-weight: 700;
   font-size: 18px;
 }
-.store span { color: #FFD700; }
+.store span { color: #996515; }
 .sub {
   font-size: 11px;
   color: #777;
@@ -462,12 +462,12 @@ body {
   border: 1px solid #d1fae5;
   overflow: hidden;
 }
-.beranda-page .info-icon { color: #16a34a; font-size: 18px; flex-shrink: 0; }
+.beranda-page .info-icon { color: #996515; font-size: 18px; flex-shrink: 0; }
 .beranda-page .info-text {
   flex: 1;
   overflow: hidden;
   white-space: nowrap;
-  color: #32CD32; /* lime green - sedikit tua dari neon */
+  color: #FFD700; /* lime green - sedikit tua dari neon */
 }
 .beranda-page .info-text::before {
   content: attr(data-text);
@@ -500,7 +500,7 @@ body {
 .beranda-page .title-bar {
   width: 60px;             /* Panjang garis horizontal */
   height: 4px;             /* Ketebalan garis */
-  background: #16a34a;     /* Tetap hijau */
+  background: #996515;     /* Tetap hijau */
   border-radius: 6px;
   margin-top: 6px;         /* Jarak dari teks ke garis */
 }
@@ -579,7 +579,7 @@ body {
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   cursor: pointer;
 }
-.beranda-page .menu-card i { font-size: 24px; color: #16a34a; margin-bottom: 8px; }
+.beranda-page .menu-card i { font-size: 24px; color: #996515; margin-bottom: 8px; }
 .beranda-page .menu-card p { font-size: 13px; font-weight: 600; }
 .beranda-page #gameGrid, .beranda-page #panelGrid, .beranda-page #otherGrid { display: none; }
 .beranda-page #titleGame, .beranda-page #titleHosting, .beranda-page #titleOther { display: none; }
@@ -1166,4 +1166,4 @@ body {
     .kalkulator-page .result-value {
         font-size: 1.3rem;
     }
-  }
+}
