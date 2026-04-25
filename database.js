@@ -176,7 +176,24 @@ const database = {
       { name: "Boyah Pass", price: "Rp44.000", status: "online" },
       { name: "Membership Bulanan", price: "Rp84.000", status: "online" }
     ]
-  }
+  }, 
+  BloodStrike: {
+  name: "Blood Strike",
+  require: ["userId"],
+  image: "https://files.catbox.moe/8uf9aq.jpg",
+  qris: false,
+  desc: "Top up Gold Blood Strike legal & aman",
+  detail: "Proses cepat, 24 jam nonstop",
+  regular: [
+    { name: "100 Gold", price: "Rp12.500", status: "online" },
+    { name: "300 Gold", price: "Rp37.000", status: "online" },
+    { name: "500 Gold", price: "Rp62.000", status: "online" },
+    { name: "1000 Gold", price: "Rp122.000", status: "online" },
+    { name: "2000 Gold", price: "Rp242.000", status: "online" },
+    { name: "5000 Gold", price: "Rp600.000", status: "online" }
+  ],
+  membership: []
+}
 };
 
 // databaseOther
@@ -224,7 +241,6 @@ const databaseHiburan = {
     desc: "Duolingo title",
     detail: "",
     items: [
-      { name: "duostu", price: "Rp9.000", status: "online" },
       { name: "Duolingo Super 1 bulan", price: "Rp7.000", status: "online" }
     ]
   },
