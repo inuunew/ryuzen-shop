@@ -1,112 +1,1222 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>RYUZEN STORE - Top Up Game & Premium</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+/* style.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Outfit', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
 
-<!-- SPLASH SCREEN -->
-<!-- SPLASH SCREEN -->
-<!-- SPLASH SCREEN -->
-<div id="splashScreen" class="splash">
-  <div class="splash-container">
-    <!-- Logo (ganti src dengan logo asli) -->
-    <img src="https://files.catbox.moe/kf8ltr.jpg" 
-         alt="Ryuzen Logo" 
-         class="splash-logo" 
-         onerror="this.style.display='none'; this.insertAdjacentHTML('afterend','<i class=\'fas fa-bolt\' style=\'font-size:60px;color:#fbbf24;margin-bottom:15px;filter:drop-shadow(0 0 8px #eab308);\'></i>')">
+/* ========== SPLASH SCREEN ========== */
+/* ========== SPLASH SCREEN ========== */
+/* ========== SPLASH SCREEN (WELCOME LEBIH BESAR) ========== */
+.splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #0f0f0f 0%, #1a1a1a 100%);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+.splash.hide {
+  opacity: 0;
+  visibility: hidden;
+}
 
-    <div class="splash-domain">yuzen-store.my.id</div>
-    <div class="welcome-text">Welcome!</div>
-    <h1>Selamat Datang di Ryuzen Store</h1>
-    <p class="desc">Top Up Game · Digital Product</p>
+.splash-container {
+  text-align: center;
+  max-width: 400px;
+  width: 85%;
+  padding: 30px 20px;
+  animation: fadeInUp 0.8s ease;
+}
 
-    <button class="splash-btn" onclick="tutupSplash()">
-      <i class="fas fa-chart-line"></i> Dashboard →
-    </button>
-  </div>
-</div>
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
-<!-- KONTEN UTAMA (LOADPAGE) -->
-<div id="mainContent" class="main-content">
-  <!-- Navbar: logo & teks kiri, ikon menu kanan -->
-  <div class="navbar">
-    <div class="nav-left">
-      <img src="https://files.catbox.moe/kf8ltr.jpg" class="logo">
-      <div class="logo-text">
-        <div class="store">RYUZEN <span>STORE</span></div>
-        <div class="sub">Menyediakan Berbagai Layanan</div>
-      </div>
-    </div>
-    <div class="nav-right">
-      <div class="icon" onclick="toggleMenu()">
-        <i class="fas fa-bars"></i>
-      </div>
-    </div>
-  </div>
+.splash-logo {
+  width: 100px;
+  height: 100px;
+  border-radius: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.25), 0 8px 20px rgba(0,0,0,0.5);
+  object-fit: cover;
+  background: #1e1e1e;
+}
 
-  <!-- TEMPAT KONTEN DINAMIS -->
-  <div id="pageContent" class="page-container fade"></div>
+/* Domain label */
+.splash-domain {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #fbbf24;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  opacity: 0.9;
+}
 
-  <div class="footer">Powered by <span>RyuzenStore</span><br>© 2026 All rights reserved</div>
-</div>
+/* 🔥 Welcome! – PALING BESAR */
+.splash-container .welcome-text {
+  font-size: 2.8rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fbbf24 0%, #eab308 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
 
-<!-- SIDEBAR -->
-<div id="overlay" onclick="closeMenu()"></div>
-<div id="sidebar">
-  <div class="sidebar-header">
-    <span>Ryuzen Store</span>
-    <i class="fas fa-xmark" onclick="closeMenu()"></i>
-  </div>
-  <div class="menu">
-    <p data-page="beranda" class="active"><i class="fas fa-home"></i> Beranda</p>
-    <p data-page="music"><i class="fas fa-music"></i> Music</p>
-    <p data-page="kalkulator"><i class="fas fa-calculator"></i> Kalkulator MLBB</p>
-    <div class="title">Informasi</div>
-    <p data-page="bantuan"><i class="fas fa-headset"></i> Bantuan & Support</p>
-    <p onclick="showNotif()"><i class="fas fa-bell"></i> Sambutan</p>
-    <p onclick="showAdmin()"><i class="fas fa-circle-info"></i> Jam Online</p>
-  </div>
-</div>
+/* Judul utama (lebih kecil) */
+.splash-container h1 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #fbbf24 0%, #eab308 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 0 0 12px;
+  letter-spacing: -0.3px;
+}
 
-<!-- POPUP NOTIF & ADMIN -->
-<div id="popupOverlay" class="popup">
-  <div id="notifBox" class="popup-box" style="display:none;">
-    <h3>🔔 Sambutan</h3>
-    <p>🎉 Selamat datang di Ryuzen Store!<br>Nikmati layanan transaksi cepat dan aman.</p>
-    <div class="popup-btn"><button onclick="closePopup()">Tutup</button></div>
-  </div>
-  <div id="adminBox" class="popup-box" style="display:none;">
-    <h3>ℹ️ Informasi Web</h3>
-    <p>Admin Top Up<br>Jam Online: 06:00 - 22:00</p>
-    <div class="popup-btn"><button onclick="closePopup()">Tutup</button></div>
-  </div>
-</div>
+/* Deskripsi */
+.splash-container .desc {
+  color: #d1d5db;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 30px;
+  font-weight: 400;
+}
 
-<!-- MODAL TOPUP (untuk beranda) -->
-<div id="topupModal" class="topup-modal">
-  <div class="topup-content">
-    <div class="topup-header">
-      <img id="gameIcon">
-      <div><h2 id="gameName"></h2><span class="instant">Instant Process</span></div>
-      <button class="close-btn" onclick="closeTopup()"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="tabs">
-      <button class="tab active" onclick="switchTab('regular',this)">Item Reguler</button>
-      <button id="membershipTab" class="tab" onclick="switchTab('membership',this)">Membership</button>
-    </div>
-    <div id="topupItems" class="topup-grid"></div>
-    <button id="confirmBtn" class="confirm-btn" onclick="goCheckout()" disabled>Konfirmasi</button>
-  </div>
-</div>
+/* Tombol Dashboard → */
+.splash-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #fbbf24, #eab308);
+  color: #0f0f0f;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(251, 191, 36, 0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: none;
+  cursor: pointer;
+}
+.splash-btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 4px 15px rgba(234, 179, 8, 0.5);
+}
+.btn-login {
+  background: linear-gradient(95deg, #f97316, #ea580c);
+  border: none;
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  border-radius: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  box-shadow: 0 10px 20px -5px rgba(249,115,22,0.4);
+  transition: all 0.2s;
+}
+.btn-login:hover { transform: scale(1.02); background: linear-gradient(95deg, #ea580c, #c2410c); }
+.btn-login:active { transform: scale(0.98); }
 
-<script src="database.js"></script>
-<script src="info.js"></script>
-<script src="main.js"></script>
-</body>
-  </html>
+/* ========== KONTEN UTAMA ========== */
+.main-content {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.main-content.show { opacity: 1; }
+body {
+  background: linear-gradient(180deg, #ecfdf5 0%, #f0fdf4 50%, #ffffff 100%);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+.page-container {
+  min-height: 60vh;
+  padding-bottom: 70px;
+}
+.fade { animation: fadeIn 0.3s ease; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.footer {
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+  margin: 30px 0;
+}
+.footer span { color: #FFD700; font-weight: 600; }
+
+/* ========== NAVBAR ========== */
+.navbar {
+  background: white;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+.logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.store {
+  font-weight: 700;
+  font-size: 18px;
+}
+.store span { color: #996515; }
+.sub {
+  font-size: 11px;
+  color: #777;
+}
+.nav-right {
+  display: flex;
+  gap: 12px;
+}
+.icon {
+  font-size: 20px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+}
+.icon:hover { background: #f3f3f3; }
+
+/* ========== SIDEBAR ========== */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  z-index: 998;
+}
+#overlay.active { display: block; }
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 260px;
+  height: 100%;
+  background: #fff;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  transition: 0.3s;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+}
+#sidebar.active { left: 0; }
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  font-weight: bold;
+  font-size: 16px;
+  border-bottom: 1px solid #eee;
+}
+.menu {
+  padding: 10px;
+}
+.menu p {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.menu p:hover { background: #f3f4f6; }
+.menu p.active {
+  background: #FFE500;
+  color: #fff;
+}
+.menu .title {
+  margin: 15px 10px 5px;
+  font-size: 12px;
+  color: #888;
+}
+
+/* ========== BOTTOM NAV ========== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 0;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+  z-index: 99;
+}
+.bottom-nav div {
+  text-align: center;
+  font-size: 12px;
+  color: #6b7280;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.bottom-nav div i { font-size: 20px; }
+.bottom-nav .active { color: #FFE500; }
+
+/* ========== POPUP ========== */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.popup-box {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+}
+.popup-btn {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.popup-btn button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ========== MODAL TOPUP (BERANDA) ========== */
+.topup-modal {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  align-items: flex-end;
+  z-index: 9999;
+}
+.topup-modal.show { display: flex; }
+.topup-content {
+  background: white;
+  width: 100%;
+  border-radius: 25px 25px 0 0;
+  padding: 20px;
+  max-height: 90vh;
+  overflow: auto;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+.topup-modal.show .topup-content { transform: translateY(0); }
+.topup-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.topup-header img { width: 45px; border-radius: 10px; }
+.instant {
+  background: #e8f7ee;
+  color: #1fa463;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+.tabs {
+  display: flex;
+  margin-top: 20px;
+  border-bottom: 2px solid #eee;
+}
+.tab {
+  flex: 1;
+  padding: 10px;
+  background: none;
+  border: none;
+  font-weight: bold;
+  color: #888;
+  cursor: pointer;
+}
+.tab.active { color: #18a558; border-bottom: 3px solid #18a558; }
+.topup-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+.item {
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  cursor: pointer;
+}
+.item.selected { border: 2px solid #16a34a; background: #ecfdf5; }
+.item.online { background: #f9fafb; }
+.item.offline {
+  background: #f9fafb;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.price { color: #16a34a; font-weight: 700; }
+.status {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+.status.online { background: #22c55e; }
+.status.offline { background: #ef4444; }
+.confirm-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: #16a34a;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  opacity: 0.5;
+  transition: 0.2s;
+}
+.confirm-btn.active { opacity: 1; }
+.close-btn {
+  margin-left: auto;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 10px;
+  background: #f3f4f6;
+  cursor: pointer;
+}
+
+/* ========== STYLE KHUSUS BERANDA ========== */
+/* Container Utama */
+.banner-container {
+    width: 100%;
+    padding: 10px 15px; /* Memberi jarak agar tidak mentok pinggir */
+    box-sizing: border-box;
+}
+
+.beranda-page .slider {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    
+    /* PENTING: Memberi tinggi pada slider agar tidak 0px */
+    aspect-ratio: 16 / 9; 
+}
+
+.beranda-page .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden; /* Tambahan agar slide yang mati tidak ter-klik */
+    transition: opacity 0.5s ease-in-out;
+}
+
+.beranda-page .slide.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
+}
+
+.beranda-page .slide img {
+    width: 100%;
+    height: 100%; /* Mengikuti tinggi slider */
+    object-fit: cover; /* Agar gambar tidak gepeng */
+    border-radius: 15px;
+}
+
+/* Tombol tetap di bawah */
+.beranda-page .slider-controls {
+    display: flex;
+    justify-content: center; /* Tombol di tengah */
+    gap: 20px;              /* Jarak antar tombol */
+    margin: 10px 0;         /* Jarak dari banner dan info box */
+}
+
+.beranda-page .slider-controls button {
+    background: #1a1a1a;    /* Warna gelap khas Inuu Market */
+    color: #FFE500;         /* Warna hijau neon */
+    border: 1px solid #FFE500;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.beranda-page .slider-controls button:hover {
+    background: #FFE500;
+    color: #1a1a1a;
+    box-shadow: 0 0 10px #00ff88;
+}
+
+
+.beranda-page .info-box {
+  margin: 10px 15px;
+  background: white;
+  border-radius: 12px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #d1fae5;
+  overflow: hidden;
+}
+.beranda-page .info-icon { color: #996515; font-size: 18px; flex-shrink: 0; }
+.beranda-page .info-text {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #FFD700; /* lime green - sedikit tua dari neon */
+}
+.beranda-page .info-text::before {
+  content: attr(data-text);
+  display: inline-block;
+  white-space: nowrap;
+  animation: scrollLeft 12s linear infinite;
+  padding-left: 100%;
+}
+@keyframes scrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+.beranda-page .search-area { display: flex; gap: 10px; padding: 15px; }
+.beranda-page .search-box { flex: 1; }
+.beranda-page .search-box input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: #fff;
+  font-size: 14px;
+}
+.beranda-page .game-title {
+  display: flex;
+  flex-direction: column;  /* Ubah jadi column biar turun ke bawah */
+  padding: 0 15px;
+  margin: 10px 0;
+}
+
+.beranda-page .title-bar {
+  width: 60px;             /* Panjang garis horizontal */
+  height: 4px;             /* Ketebalan garis */
+  background: #996515;     /* Tetap hijau */
+  border-radius: 6px;
+  margin-top: 6px;         /* Jarak dari teks ke garis */
+}
+
+.beranda-page .title-text h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 2px;
+}
+
+.beranda-page .title-text p {
+  font-size: 13px;
+  color: #6b7280;
+}
+.beranda-page .game-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  padding: 15px;
+}
+.beranda-page .game-card {
+  background: white;
+  border-radius: 18px;
+  padding: 12px;
+  cursor: pointer;
+  border: 1px solid #ecfdf5;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+  transition: 0.15s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.beranda-page .game-card:active { transform: scale(0.98); }
+.beranda-page .game-img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 6px;
+  margin-bottom: 8px;
+  border: 1px solid #f1f5f9;
+  position: relative;
+}
+.beranda-page .game-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+.beranda-page .game-name { font-size: 13px; font-weight: 600; color: #1f2937; }
+.beranda-page .game-service { font-size: 11px; color: #16a34a; font-weight: 500; }
+.beranda-page .badge-premium {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: linear-gradient(135deg, #facc15, #f59e0b);
+  color: #000;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+.beranda-page .menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  padding: 15px;
+}
+.beranda-page .menu-card {
+  background: white;
+  border-radius: 18px;
+  padding: 18px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  cursor: pointer;
+}
+.beranda-page .menu-card i { font-size: 24px; color: #996515; margin-bottom: 8px; }
+.beranda-page .menu-card p { font-size: 13px; font-weight: 600; }
+.beranda-page #gameGrid, .beranda-page #panelGrid, .beranda-page #otherGrid { display: none; }
+.beranda-page #titleGame, .beranda-page #titleHosting, .beranda-page #titleOther { display: none; }
+.beranda-page #backBtn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      margin: 8px 16px;
+      padding: 10px 20px;
+      border-radius: 40px;
+      font-weight: 600;
+      width: fit-content;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+.beranda-page #backBtn:active {
+      background: #f1f5f9;
+    }
+
+/* ========== STYLE KHUSUS PENGUMUMAN ========== */
+.pengumuman-page .pengumuman-container {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.pengumuman-page .card {
+  background: white;
+  border-radius: 20px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+}
+.pengumuman-page .card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.pengumuman-page .card-header img {
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+.pengumuman-page .info .title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #111827;
+}
+.pengumuman-page .meta {
+  font-size: 12px;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+.pengumuman-page .badge-info, .pengumuman-page .badge-promo, .pengumuman-page .badge-event {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: white;
+}
+.pengumuman-page .badge-info { background: #3b82f6; }
+.pengumuman-page .badge-promo { background: #ef4444; }
+.pengumuman-page .badge-event { background: #8b5cf6; }
+.pengumuman-page .banner {
+  width: 100%;
+  border-radius: 15px;
+  margin-top: 10px;
+}
+.pengumuman-page .desc-box {
+  background: #f3f4f6;
+  padding: 12px;
+  border-radius: 14px;
+  margin-top: 10px;
+}
+.pengumuman-page .desc {
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.6;
+}
+.pengumuman-page .tags {
+  color: #0ea5e9;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* ========== STYLE KHUSUS MUSIC ========== */
+/* Pastikan container halaman music menggunakan flex agar konten di tengah */
+.music-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+
+.music-page .player {
+  background: linear-gradient(145deg, #3a3a3a, #1f1f1f);
+  border-radius: 28px;
+  padding: 20px;
+  width: 100%;
+  max-width: 360px;
+  box-shadow: 8px 8px 16px rgba(0,0,0,0.4), -4px -4px 8px rgba(255,255,255,0.08);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.music-page .lyrics {
+  height: 150px;
+  overflow-y: auto;
+  margin-top: 10px;
+  scroll-behavior: auto; /* tidak ada smooth paksa */
+}
+.music-page .song-title {
+  font-weight: bold;
+  margin-top: 10px;
+  color: #ffffff
+}
+.music-page .artist {
+  color: gray;
+  font-size: 14px;
+}
+.music-page .lyrics {
+  height: 150px;
+  overflow-y: auto;
+  margin-top: 10px;
+}
+.music-page .lyrics p {
+  margin: 5px;
+  opacity: 0.4;
+  transition: 0.2s;
+}
+.music-page .lyrics .active {
+  opacity: 1;
+  color: #16a34a;
+  font-weight: bold;
+}
+.music-page .progress-container {
+  height: 6px;
+  background: #ddd;
+  margin: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.music-page .progress {
+  height: 100%;
+  width: 0%;
+  background: #16a34a;
+  border-radius: 10px;
+}
+.music-page .controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+.music-page .controls button {
+  border: none;
+  background: #16a34a;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* CARD ABU-ABU DOUBLE BACKGROUND */
+/* Card player abu-abu double background - DI TENGAH */
+
+
+
+/* Container lirik tetap memiliki tinggi dan scroll manual */
+/* Jika Anda ingin card vertikal juga di tengah (tengah layar penuh), 
+   tambahkan margin top/bottom auto juga, tapi pastikan parent-nya sudah flex */
+
+/* KASET WRAPPER */
+.cassette-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* GAMBAR KASET */
+.cassette-img {
+  width: 200px;          /* sesuaikan ukuran */
+  height: auto;
+  border-radius: 12px;   /* opsional, jika gambar ingin sedikit rounded */
+  transition: transform 0.1s linear;
+  animation: spinCassette 2s linear infinite;
+  animation-play-state: paused;   /* awal diam */
+}
+
+/* Animasi putar */
+@keyframes spinCassette {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Saat lagu diputar, tambahkan class 'playing' pada wrapper */
+.cassette-wrapper.playing .cassette-img {
+  animation-play-state: running;
+}
+/* Bottom Sheet Playlist - global */
+.bottom-sheet {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  visibility: hidden;
+  transition: visibility 0.3s;
+}
+.bottom-sheet.show {
+  visibility: visible;
+}
+.bottom-sheet-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.bottom-sheet.show .bottom-sheet-overlay {
+  opacity: 1;
+}
+.bottom-sheet-container {
+  position: relative;
+  width: 100%;
+  max-height: 70%;
+  background: #1e1e2f;
+  border-radius: 20px 20px 0 0;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.bottom-sheet.show .bottom-sheet-container {
+  transform: translateY(0);
+}
+.bottom-sheet-header {
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #333;
+  background: #2a2a3a;
+}
+.sheet-handle {
+  width: 40px;
+  height: 4px;
+  background: #666;
+  border-radius: 2px;
+  margin: 0 auto 8px;
+}
+.bottom-sheet-header h3 {
+  margin: 0;
+  color: white;
+  font-size: 18px;
+}
+.sheet-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #aaa;
+  cursor: pointer;
+}
+.bottom-sheet-list {
+  overflow-y: auto;
+  padding: 10px 0;
+}
+.playlist-sheet-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 1px solid #2a2a3a;
+  background: #1e1e2f;
+}
+.playlist-sheet-item.active {
+  background: #3a2c4a;
+}
+.playlist-item-info {
+  flex: 1;
+}
+.playlist-item-title {
+  font-weight: bold;
+  color: white;
+}
+.playlist-item-artist {
+  font-size: 12px;
+  color: #aaa;
+}
+.playlist-item-play {
+  background: #ff9800;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.1s;
+}
+.playlist-item-play:active {
+  transform: scale(0.95);
+}
+.empty-playlist {
+  text-align: center;
+  padding: 40px;
+  color: #aaa;
+}
+/* ========== STYLE KHUSUS BANTUAN ========== */
+.bantuan-page .bantuan-wrapper {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 15px;
+}
+.bantuan-page .header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+.bantuan-page .head-icon {
+  width: 70px;
+  height: 70px;
+  background: #e6f8ee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin: auto;
+  font-size: 30px;
+  color: #22c55e;
+  margin-bottom: 10px;
+}
+.bantuan-page .header h2 { font-size: 24px; }
+.bantuan-page .header p { font-size: 14px; color: #6b7280; }
+.bantuan-page .card {
+  display: flex;
+  align-items: center;
+  background: #fafafa;
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  text-decoration: none;
+  color: black;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+.bantuan-page .icon-box {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-right: 15px;
+}
+.bantuan-page .wa { background: #25D366; color: white; }
+.bantuan-page .info { background: #111827; color: white; }
+.bantuan-page .card-text { flex: 1; }
+.bantuan-page .badge {
+  background: #dcfce7;
+  color: #16a34a;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  margin-left: 6px;
+}
+.bantuan-page .arrow { color: #9ca3af; }
+
+/* ========== STYLE KHUSUS KALKULATOR ========== */
+/* ========== KALKULATOR MLBB ========== */
+/* ========== KALKULATOR STYLE MIRIP SCREENSHOT ========== */
+.kalkulator-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.kalkulator-page .calculator-card {
+    max-width: 550px;
+    width: 100%;
+    margin: 0 auto;
+    background: white;
+    border-radius: 28px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 24px 20px 32px;
+    transition: all 0.2s;
+}
+
+.kalkulator-page .section-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1e293b;
+    text-align: center;
+    margin: 0 0 20px 0;
+    letter-spacing: -0.3px;
+}
+
+/* Tab Bar */
+.kalkulator-page .tab-bar {
+    display: flex;
+    gap: 12px;
+    background: #eef2ff;
+    padding: 6px;
+    border-radius: 60px;
+    margin-bottom: 28px;
+}
+
+.kalkulator-page .tab-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 10px 0;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.kalkulator-page .tab-btn.active {
+    background: #3b82f6;
+    color: white;
+    box-shadow: 0 2px 8px rgba(59,130,246,0.3);
+}
+
+/* Form Card */
+.kalkulator-page .form-card {
+    background: transparent;
+    padding: 0;
+    margin-bottom: 24px;
+    border: none;
+}
+
+.kalkulator-page .input-group {
+    margin-bottom: 18px;
+}
+
+.kalkulator-page .input-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #334155;
+    margin-bottom: 6px;
+}
+
+.kalkulator-page .input-group input,
+.kalkulator-page .input-group select {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 16px;
+    border: 1px solid #cbd5e1;
+    background: white;
+    color: #0f172a;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.2s;
+}
+
+.kalkulator-page .input-group input:focus,
+.kalkulator-page .input-group select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+}
+
+.kalkulator-page .input-group input[type="range"] {
+    padding: 0;
+    accent-color: #3b82f6;
+}
+
+.kalkulator-page .range-value {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 0.75rem;
+    color: #475569;
+}
+
+.kalkulator-page .badge-hint {
+    background: #eef2ff;
+    border-radius: 30px;
+    padding: 4px 12px;
+    font-size: 0.7rem;
+    color: #1e40af;
+}
+
+/* Tombol */
+.kalkulator-page .action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 28px;
+}
+
+.kalkulator-page .btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 40px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.kalkulator-page .btn:active {
+    transform: scale(0.97);
+}
+
+.kalkulator-page .reset-btn {
+    background: #f1f5f9;
+    color: #1e293b;
+    border: 1px solid #e2e8f0;
+}
+
+.kalkulator-page .reset-btn:hover {
+    background: #e2e8f0;
+}
+
+.kalkulator-page .hitung-btn {
+    background: #3b82f6;
+    color: white;
+    box-shadow: 0 2px 6px rgba(59,130,246,0.3);
+}
+
+/* Area Hasil */
+.kalkulator-page .result-area {
+    background: #f8fafc;
+    border-radius: 20px;
+    padding: 20px 16px;
+    text-align: center;
+    border-left: 4px solid #3b82f6;
+}
+
+.kalkulator-page .result-placeholder {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.kalkulator-page .result-value {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #0f172a;
+    word-break: break-word;
+    margin-bottom: 6px;
+}
+
+.kalkulator-page .result-desc {
+    font-size: 0.8rem;
+    color: #475569;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .kalkulator-page .calculator-card {
+        padding: 20px 16px;
+    }
+    .kalkulator-page .result-value {
+        font-size: 1.3rem;
+    }
+}
