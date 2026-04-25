@@ -207,7 +207,7 @@ body {
 }
 .menu p:hover { background: #f3f4f6; }
 .menu p.active {
-  background: #16a34a;
+  background: #FFE500;
   color: #fff;
 }
 .menu .title {
