@@ -1,0 +1,80 @@
+<!-- Banner (tetap) -->
+<div class="banner-container">
+  <div class="slider">
+      <div class="slide active">
+          <img src="assets/banner1.jpg" alt="Banner Ryuzen Market">
+      </div>
+      <div class="slide">
+          <img src="assets/banner2.jpg" alt="Syarat dan Ketentuan">
+      </div>
+  </div>
+
+  <div class="slider-controls">
+      <button class="prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+      <button class="next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+  </div>
+
+
+  <div class="info-box">
+    <div class="info-icon"><i class="fas fa-bullhorn"></i></div>
+    <div class="info-text" data-text="Selamat datang di InuuMarket • Top Up Game Murah & Cepat • Promo Spesial Diskon Besar • Proses Otomatis 24 Jam"></div>
+  </div>
+  <div class="search-area" id="searchArea" style="display: none;">
+    <div class="search-box"><input type="text" id="searchGame" placeholder="Cari produk..."></div>
+  </div>
+</div>
+
+<!-- JUDUL & MENU UTAMA (3 kartu) -->
+<div class="game-title" id="titleLayananUtama">
+  <div class="title-text">
+    <h2><i class="fas fa-list"></i> Daftar Layanan</h2>
+    <p>Pilih kategori layanan utama</p>
+  </div>
+    <div class="title-bar"></div>
+</div>
+<div class="menu-grid" id="menuGridUtama">
+  <div class="menu-card" onclick="openCategory('game')"><i class="fas fa-gamepad"></i><p>Top Up Games</p></div>
+  <div class="menu-card" onclick="openCategory('hiburan')"><i class="fas fa-crown"></i><p>Akun Premium</p></div>
+    <div class="menu-card" onclick="openCategory('other')">
+    <i class="fas fa-box"></i>
+    <p>Produk Tambahan</p>
+  </div>
+</div>
+
+<!-- Tombol Kembali -->
+<div id="backBtn" onclick="goBack()" style="display:none;"><i class="fas fa-arrow-left"></i> Kembali</div>
+
+<!-- ========== AREA KONTEN DINAMIS ========== -->
+<!-- Game -->
+<div class="game-title" id="titleGame" style="display:none;">
+  <div class="title-bar"></div>
+  <div class="title-text"><h2><i class="fas fa-gamepad"></i> Top Up Game</h2><p>Layanan 24 jam harga terjangkau dan aman 🔥</p></div>
+</div>
+<div class="game-grid" id="gameGrid" style="display:none;"></div>
+
+<!-- Hosting -->
+<div class="game-title" id="titleHosting" style="display:none;">
+  <div class="title-bar"></div>
+  <div class="title-text"><h2><i class="fas fa-server"></i> Hosting Area</h2><p>Layanan Hosting Panel Pterodactyl/VPS/Digital Ocean 🌊</p></div>
+</div>
+<div class="game-grid" id="panelGrid" style="display:none;"></div>
+
+<!-- Hiburan (Akun Premium) -->
+<div class="game-title" id="titleHiburan" style="display:none;">
+  <div class="title-bar"></div>
+  <div class="title-text">
+    <h2 style="color: #FFD700; text-shadow: 1px 1px 2px #000;"><i class="fas fa-crown"></i> Akun Premium</h2>
+    <p>Langganan premium berbasis akun (BUKAN APK MOD), beli = sabar</p>
+  </div>
+</div>
+<div class="game-grid" id="hiburanGrid" style="display:none;"></div>
+
+<!-- Other (Produk Tambahan: Pulsa, E-Wallet, dll) -->
+<div class="game-title" id="titleOther" style="display:none;">
+  <div class="title-bar"></div>
+  <div class="title-text">
+    <h2><i class="fas fa-box"></i> Produk Tambahan</h2>
+    <p>Pulsa, E-Wallet, VPS, dan lainnya</p>
+  </div>
+</div>
+<div class="game-grid" id="otherGrid" style="display:none;"></div>
